@@ -3,49 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CONS - Sign Up / Login</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <title>CONS - Fintech Simplified</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="landing-styles.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 </head>
 <body>
-    <canvas id="particleCanvas"></canvas>
-    <div class="container">
-        <div class="auth-card">
-            <div class="logo">
-                <h2>CONS</h2>
-                <span>Fintech Simplified</span>
+    <!-- Gamified Onboarding Pop-Up -->
+    <div id="onboardingPopup" class="onboarding-popup">
+        <div class="popup-content">
+            <h2>Welcome to CONS! 🎉</h2>
+            <p>Explore our features to unlock a 5% off mock discount on your first transaction!</p>
+            <div class="progress-bar">
+                <div id="progress" class="progress"></div>
             </div>
-
-            <!-- Toggle Buttons -->
-            <div class="auth-toggle">
-                <button class="toggle-btn active" onclick="showSignup()">Sign Up</button>
-                <button class="toggle-btn" onclick="showLogin()">Login</button>
-            </div>
-
-            <!-- Signup Form -->
-            <div id="signupForm" class="auth-form active">
-                <h3>Create Your Account</h3>
-                <div class="input-group">
-                    <input type="email" id="signupEmail" placeholder="Email Address" required>
-                    <input type="password" id="signupPassword" placeholder="Password" required>
-                </div>
-                <button class="auth-btn" onclick="signup()">Sign Up</button>
-                <p class="error-message" id="signupError"></p>
-            </div>
-
-            <!-- Login Form -->
-            <div id="loginForm" class="auth-form">
-                <h3>Welcome Back</h3>
-                <div class="input-group">
-                    <input type="email" id="loginEmail" placeholder="Email Address" required>
-                    <input type="password" id="loginPassword" placeholder="Password" required>
-                </div>
-                <button class="auth-btn" onclick="login()">Login</button>
-                <p class="error-message" id="loginError"></p>
-            </div>
+            <p id="taskText">Task 1: Scroll to the Use Cases section</p>
+            <button id="skipPopup" class="skip-btn" tabindex="0">Skip</button>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <i class="fas fa-wallet logo-icon"></i>
+            <h2>CONS</h2>
+        </div>
+        <nav class="nav">
+            <ul class="nav-links">
+                <li><a href="#home" tabindex="0">Home</a></li>
+                <li class="dropdown">
+                    <a href="#company" class="dropdown-toggle" tabindex="0">Company <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#about" tabindex="0">About Us</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="login.html" class="auth-btn login-btn" tabindex="0">Login</a>
+                <a href="login.html" class="auth-btn signup-btn" tabindex="0">Signup</a>
+                <button id="themeToggle" class="theme-toggle" tabindex="0">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="voiceDemo" class="voice-btn" tabindex="0">
+                    <i class="fas fa-microphone"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div id="particles-js" class="particles"></div>
+        <div id="globeCanvas" class="globe-canvas"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-left">
+                <img class="hero-avatar" src="https://api.dicebear.com/7.x/adventurer/svg?seed=withdrawing&backgroundColor=6b48ff&skinColor=f2d3b1" alt="Person Withdrawing Money">
+            </div>
+            <div class="hero-right">
+                <h1><span id="typewriter"></span></h1>
+                <p>With CONS, Effortlessly Process Payroll, Accept Global Gig Payments, and Connect with Top Talent Worldwide.</p>
+                <a href="login.html" class="hero-btn pulse" tabindex="0">Get Started</a>
+                <div class="stats-grid">
+                    <div class="stat-card" data-tooltip="Growing daily across the globe!">
+                        <i class="fas fa-users"></i>
+                        <h3>100K+</h3>
+                        <p>Active Users</p>
+                    </div>
+                    <div class="stat-card" data-tooltip="Serving businesses in over 50 countries!">
+                        <i class="fas fa-globe"></i>
+                        <h3>50+</h3>
+                        <p>Countries</p>
+                    </div>
+                    <div class="stat-card" data-tooltip="Processed securely with zero downtime!">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <h3>$1M+</h3>
+                        <p>Payments Processed</p>
+                    </div>
+                </div>
+                <div class="currency-converter">
+                    <p>Live USD/NGN Rate: <span id="exchangeRate">Loading...</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section id="usecases" class="usecases-section">
+        <h2>Use Cases</h2>
+        <div class="usecases-tabs">
+            <button class="tab-btn active" onclick="showTab('personal')" tabindex="0">Personal</button>
+            <button class="tab-btn" onclick="showTab('business')" tabindex="0">Business</button>
+        </div>
+        <div id="personal" class="tab-content active">
+            <div class="usecase-item">
+                <img src="https://images.unsplash.com/photo-1600585154347-6d9e4e6b7b5e?q=80&w=2070&auto=format&fit=crop" alt="Personal Finance">
+                <div class="usecase-header">
+                    <img class="avatar" src="https://api.dicebear.com/7.x/avataaars/svg?seed=personal" alt="Personal Avatar">
+                    <h3>Manage Your Finances</h3>
+                </div>
+                <p>Track your income, expenses, and gig payments seamlessly with CONS’s intuitive tools.</p>
+                <div class="usecase-meta">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Real-Time Tracking</span>
+                </div>
+            </div>
+        </div>
+        <div id="business" class="tab-content">
+            <div class="usecase-item">
+                <img src="https://images.unsplash.com/photo-1556740714-3c1f8a1a6b5e?q=80&w=2070&auto=format&fit=crop" alt="Business Payroll">
+                <div class="usecase-header">
+                    <img class="avatar" src="https://api.dicebear.com/7.x/avataaars/svg?seed=business" alt="Business Avatar">
+                    <h3>Streamline Payroll</h3>
+                </div>
+                <p>Automate payroll for your team and process global payments with ease.</p>
+                <div class="usecase-meta">
+                    <i class="fas fa-globe-americas"></i>
+                    <span>Global Payments</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section id="testimonials" class="testimonials-section">
+        <h2>What Our Users Say</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <img class="testimonial-avatar" src="https://api.dicebear.com/7.x/avataaars/svg?seed=user1" alt="User 1">
+                <p>"CONS made managing my freelance payments so easy! I can now focus on my work without worrying about payroll."</p>
+                <h3>Jane Doe</h3>
+                <span>Freelancer, Lagos</span>
+                <small>April 2025</small>
+            </div>
+            <div class="testimonial-card">
+                <img class="testimonial-avatar" src="https://api.dicebear.com/7.x/avataaars/svg?seed=user2" alt="User 2">
+                <p>"The global payment feature is a game-changer for my business. Highly recommend CONS!"</p>
+                <h3>John Smith</h3>
+                <span>Small Business Owner, Abuja</span>
+                <small>March 2025</small>
+            </div>
+            <div class="testimonial-card">
+                <img class="testimonial-avatar" src="https://api.dicebear.com/7.x/avataaars/svg?seed=user3" alt="User 3">
+                <p>"CONS’s AI insights helped me save smarter. It’s perfect for young professionals!"</p>
+                <h3>Aisha Bello</h3>
+                <span>Marketer, Ibadan</span>
+                <small>April 2025</small>
+            </div>
+        </div>
+    </section>
+
+    <!-- MVP Section -->
+    <section id="mvp" class="mvp-section">
+        <h2>Our MVP Features</h2>
+        <div class="mvp-grid">
+            <div class="mvp-card">
+                <i class="fas fa-robot"></i>
+                <h3>AI-Driven Insights</h3>
+                <p>Leverage AI to get personalized financial advice and spending insights.</p>
+                <div class="mvp-meta">
+                    <span>Powered by AI</span>
+                </div>
+            </div>
+            <div class="mvp-card">
+                <i class="fas fa-globe"></i>
+                <h3>Multi-Currency Support</h3>
+                <p>Transact in multiple currencies without worrying about conversion fees.</p>
+                <div class="mvp-meta">
+                    <span>Global Reach</span>
+                </div>
+            </div>
+            <div class="mvp-card">
+                <i class="fas fa-plug"></i>
+                <h3>Seamless Integrations</h3>
+                <p>Connect CONS with your favorite tools like Slack, QuickBooks, and more.</p>
+                <div class="mvp-meta">
+                    <span>10+ Integrations</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transaction Demo Section -->
+    <section id="transactionDemo" class="transaction-section">
+        <h2>Experience Lightning-Fast Payments</h2>
+        <button id="startTransaction" class="demo-btn" tabindex="0">Start Mock Transaction</button>
+        <div id="transactionAnimation" class="transaction-animation">
+            <p id="transactionStatus">Click to see CONS in action!</p>
+            <div class="progress-circle">
+                <svg viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="40" stroke="#facc15" stroke-width="10" fill="none" />
+                    <circle id="progressCircle" cx="50" cy="50" r="40" stroke="#2dd4bf" stroke-width="10" fill="none" stroke-dasharray="251" stroke-dashoffset="251" />
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <h3>Is CONS safe?</h3>
+                <p>Yes, we use bank-grade encryption and comply with global security standards to protect your data.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What are the fees?</h3>
+                <p>CONS offers low transaction fees, starting at 1% for local payments. Check our pricing page for details.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How do I sign up?</h3>
+                <p>Click “Start for Free” and follow the quick onboarding process. It takes less than 5 minutes!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating CTA Banner -->
+    <div id="floatingCta" class="floating-cta">
+        <p>Join CONS Today! 🚀</p>
+        <a href="login.html" class="cta-btn" tabindex="0">Sign Up Now</a>
+    </div>
+
+    <!-- Footer -->
+    <footer id="about" class="footer">
+        <p>© 2025 CONS. All rights reserved.</p>
+        <a href="login.html" tabindex="0">Sign Up / Login</a>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" tabindex="0">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="landing-script.js"></script>
 </body>
 </html>
