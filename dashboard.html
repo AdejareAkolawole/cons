@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONS Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles-dash.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>CONS</h2>
+                <span>Beta Version</span>
+            </div>
+            <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
+            <nav>
+                <ul>
+                    <li class="active"><span class="icon">🏠</span><span class="label">Home</span><span class="tooltip">Home Dashboard</span></li>
+                    <li><span class="icon">💳</span><span class="label">Wallet</span><span class="tooltip">Manage Wallets</span></li>
+                    <li><span class="icon">💳</span><span class="label">Card</span><span class="tooltip">Card Settings</span></li>
+                    <li><span class="icon">💸</span><span class="label">Payment</span><span class="tooltip">Make Payments</span></li>
+                    <li><span class="icon">👤</span><span class="label">Profile</span><span class="tooltip">Your Profile</span></li>
+                    <li><span class="icon">❓</span><span class="label">Support</span><span class="tooltip">Get Help</span></li>
+                    <li><span class="icon">🚪</span><span class="label">Logout</span><span class="tooltip">Sign Out</span></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header>
+                <div class="greeting">
+                    <h1>Dashboard</h1>
+                    <p>Good evening, Ifeoluwa</p>
+                </div>
+                <div class="user-profile">
+                    <span class="avatar">IA</span>
+                    <span>Ifeoluwa Akolawole</span>
+                    <span class="dropdown">▼</span>
+                </div>
+            </header>
+
+            <!-- Wallet Cards -->
+            <div class="wallet-section">
+                <div class="wallet-card dark">
+                    <label>Switch between fiat wallets</label>
+                    <select id="fiatWallet">
+                        <option>Naira Balance</option>
+                        <option>USD Balance</option>
+                    </select>
+                    <h2 id="fiatBalance">NGN10.30</h2>
+                    <div class="actions">
+                        <button onclick="alert('TopUp coming soon!')">TopUp</button>
+                        <button onclick="alert('Convert coming soon!')">Convert</button>
+                        <button onclick="alert('Transfer coming soon!')">Transfer</button>
+                    </div>
+                </div>
+                <div class="wallet-card light">
+                    <label>Switch between digital wallets</label>
+                    <select id="digitalWallet">
+                        <option>tNGN</option>
+                        <option>tUSD</option>
+                    </select>
+                    <h2 id="digitalBalance">tNGN *******</h2>
+                    <div class="actions">
+                        <button onclick="alert('TopUp coming soon!')">TopUp</button>
+                        <button onclick="alert('Convert coming soon!')">Convert</button>
+                        <button onclick="alert('Transfer coming soon!')">Transfer</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Currency Converter -->
+            <div class="currency-converter">
+                <input type="number" id="amount" placeholder="Enter amount">
+                <select id="fromCurrency">
+                    <option value="NGN">NGN</option>
+                    <option value="USD">USD</option>
+                </select>
+                <span>→</span>
+                <select id="toCurrency">
+                    <option value="USD">USD</option>
+                    <option value="NGN">NGN</option>
+                </select>
+                <button onclick="convertCurrency()">Convert</button>
+                <span id="conversionResult"></span>
+            </div>
+
+            <!-- Savings Goals -->
+            <div class="savings-goals">
+                <h3>Savings Goals</h3>
+                <div id="addGoalForm">
+                    <input type="text" id="goalName" placeholder="Goal Name">
+                    <input type="number" id="goalAmount" placeholder="Target Amount">
+                    <button onclick="addGoal()">Add Goal</button>
+                </div>
+                <div id="goalsList"></div>
+            </div>
+
+            <!-- Loan Application -->
+            <div class="loan-application">
+                <h3>Apply for a Loan</h3>
+                <div id="loanForm">
+                    <input type="text" id="loanPurpose" placeholder="Loan Purpose">
+                    <input type="number" id="loanAmount" placeholder="Loan Amount">
+                    <select id="loanTerm">
+                        <option value="6">6 Months</option>
+                        <option value="12">12 Months</option>
+                        <option value="24">24 Months</option>
+                    </select>
+                    <button onclick="applyLoan()">Apply</button>
+                </div>
+            </div>
+
+            <!-- Recent Activities -->
+            <div class="recent-activities">
+                <h3>Recent Activities</h3>
+                <div class="notification-dot"></div>
+                <ul id="transactions">
+                    <li>
+                        <p>You paid IFEOLUWA MARY AKOLAWOLE</p>
+                        <p>2024/07/24 07:41PM</p>
+                        <p class="amount debit">-NGN1950.00</p>
+                    </li>
+                    <li>
+                        <p>You paid IJEZIE AFAM</p>
+                        <p>2024/07/23 01:48PM</p>
+                        <p class="amount debit">-NGN2000.00</p>
+                    </li>
+                    <li>
+                        <p>You paid OLATOYE SUNDAY ALAO</p>
+                        <p>2024/07/21 08:07PM</p>
+                        <p class="amount debit">-NGN3000.00</p>
+                    </li>
+                    <li>
+                        <p>You paid JUST RITE LIMITED - Justrite Abeokuta</p>
+                        <p>2024/07/21 07:51PM</p>
+                        <p class="amount debit">-NGN5000.00</p>
+                    </li>
+                    <li>
+                        <p>You were paid by Paycom(opay)/RICHARD OLASHILE ANIMASHAUN</p>
+                        <p>2024/07/21 07:51PM</p>
+                        <p class="amount credit">NGN5000.00</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Money Flow -->
+            <div class="money-flow">
+                <h3>Money Flow</h3>
+                <select>
+                    <option>NGN</option>
+                </select>
+                <select>
+                    <option>All time</option>
+                </select>
+                <div class="chart">
+                    <div class="bar credit-bar"></div>
+                    <div class="bar debit-bar"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script-dash.js"></script>
+</body>
+</html>

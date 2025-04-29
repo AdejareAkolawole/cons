@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONS - Sign Up / Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <canvas id="particleCanvas"></canvas>
+    <div class="container">
+        <div class="auth-card">
+            <div class="logo">
+                <h2>CONS</h2>
+                <span>Fintech Simplified</span>
+            </div>
+
+            <!-- Toggle Buttons -->
+            <div class="auth-toggle">
+                <button class="toggle-btn active" onclick="showSignup()">Sign Up</button>
+                <button class="toggle-btn" onclick="showLogin()">Login</button>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signupForm" class="auth-form active">
+                <h3>Create Your Account</h3>
+                <div class="input-group">
+                    <input type="email" id="signupEmail" placeholder="Email Address" required>
+                    <input type="password" id="signupPassword" placeholder="Password" required>
+                </div>
+                <button class="auth-btn" onclick="signup()">Sign Up</button>
+                <p class="error-message" id="signupError"></p>
+            </div>
+
+            <!-- Login Form -->
+            <div id="loginForm" class="auth-form">
+                <h3>Welcome Back</h3>
+                <div class="input-group">
+                    <input type="email" id="loginEmail" placeholder="Email Address" required>
+                    <input type="password" id="loginPassword" placeholder="Password" required>
+                </div>
+                <button class="auth-btn" onclick="login()">Login</button>
+                <p class="error-message" id="loginError"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
