@@ -99,7 +99,6 @@ body {
     display: flex;
     align-items: center;
     gap: 0.3rem;
-    cursor: pointer;
 }
 
 .company-toggle i {
@@ -124,10 +123,6 @@ body {
 }
 
 .company-menu:hover .submenu {
-    display: grid;
-}
-
-.submenu.active {
     display: grid;
 }
 
@@ -209,6 +204,71 @@ body {
     transform: scale(1.05);
     box-shadow: 0 5px 14px rgba(74, 0, 224, 0.4);
     color: #00D4B4 !important;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background: #1F1F4A;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    z-index: 1001;
+    transition: right 0.3s ease;
+}
+
+.mobile-menu.active {
+    right: 0;
+}
+
+.mobile-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.mobile-menu-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #1E90FF;
+    cursor: pointer;
+}
+
+.mobile-menu-group {
+    margin-bottom: 1.5rem;
+}
+
+.mobile-menu-group h3 {
+    color: #1E90FF;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.mobile-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: background 0.3s ease;
+}
+
+.mobile-menu-item i {
+    font-size: 1.2rem;
+    color: #1E90FF;
+}
+
+.mobile-menu-item:hover {
+    background: rgba(30, 144, 255, 0.1);
 }
 
 /* Hero Section */
@@ -312,6 +372,7 @@ body {
 
 /* Section Headers */
 section h2 {
+    display: block;
     text-align: center;
     font-family: 'Poppins', sans-serif;
     font-size: 2.7rem;
@@ -320,9 +381,10 @@ section h2 {
     margin-bottom: 2.5rem;
     position: relative;
     letter-spacing: 0.02em;
-    opacity: 0;
-    transform: translateY(20px);
+    opacity: 1;
+    transform: translateY(0);
     transition: opacity 0.5s ease, transform 0.5s ease;
+    z-index: 1;
 }
 
 section h2.visible {
@@ -335,10 +397,10 @@ section h2::after {
     position: absolute;
     bottom: -8px;
     left: 50%;
-    width: 0;
+    width: 100px;
     height: 3px;
     background: linear-gradient(90deg, #4A00E0, #8E2DE2);
-    transition: width 0.5s ease, left 0.5s ease;
+    left: calc(50% - 50px);
 }
 
 section h2.visible::after {
@@ -810,62 +872,10 @@ section h2.visible::after {
 
     .nav-links {
         display: none;
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 100%;
-        height: 100vh;
-        background: #4A00E0;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        z-index: 1001;
-        transition: right 0.3s ease;
     }
 
-    .nav-links.active {
+    .mobile-menu {
         display: flex;
-        right: 0;
-    }
-
-    .nav-links li {
-        margin: 1.5rem 0;
-    }
-
-    .nav-links a {
-        color: #FFFFFF;
-        font-size: 1.3rem;
-    }
-
-    .nav-links a::after {
-        display: none;
-    }
-
-    .company-menu:hover .submenu {
-        display: none;
-    }
-
-    .submenu {
-        position: static;
-        width: 90%;
-        max-width: 400px;
-        background: #FFFFFF;
-        border: 1px solid #4A00E0;
-        box-shadow: 0 4px 12px rgba(74, 0, 224, 0.2);
-        padding: 1rem;
-        border-radius: 10px;
-        z-index: 1003;
-    }
-
-    .company-menu.active .submenu {
-        display: grid;
-    }
-
-    .login-button {
-        background: #FFFFFF;
-        color: #4A00E0 !important;
-        font-size: 1.1rem;
-        padding: 0.7rem 1.8rem;
     }
 
     .hero-container {
@@ -892,6 +902,7 @@ section h2.visible::after {
     }
 
     .features h2,
+    .partners h2,
     .about h2,
     .blog h2 {
         font-size: 2.2rem;
@@ -945,8 +956,12 @@ section h2.visible::after {
         font-size: 1.2rem;
     }
 
-    .submenu {
-        width: 95%;
-        padding: 0.8rem;
+    .mobile-menu {
+        padding: 1.5rem;
+    }
+
+    .mobile-menu-item {
+        padding: 0.6rem;
+        font-size: 1rem;
     }
 }

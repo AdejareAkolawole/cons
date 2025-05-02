@@ -1,45 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    const companyMenu = document.querySelector('.company-menu');
-    const submenu = document.querySelector('.submenu');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const closeButton = document.querySelector('.mobile-menu-close');
+    const mobileMenuItems = document.querySelectorAll('.mobile-menu-item');
+    const sectionHeaders = document.querySelectorAll('section h2');
 
-    // Mobile menu toggle
+    // Toggle mobile menu
     menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        if (!navLinks.classList.contains('active')) {
-            companyMenu.classList.remove('active');
-            submenu.classList.remove('active');
-        }
+        mobileMenu.classList.add('active');
     });
 
-    // Company submenu toggle for mobile
-    companyMenu.addEventListener('click', (e) => {
-        if (window.innerWidth <= 768) {
-            e.preventDefault();
-            companyMenu.classList.toggle('active');
-            submenu.classList.toggle('active');
-        }
+    // Close mobile menu
+    closeButton.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
     });
 
-    // Close mobile menu and submenu when clicking a link
-    navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (window.innerWidth <= 768) {
-                navLinks.classList.remove('active');
-                companyMenu.classList.remove('active');
-                submenu.classList.remove('active');
-            }
-        });
-    });
-
-    // Close submenu when clicking non-Company links
-    navLinks.querySelectorAll('li:not(.company-menu) a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (window.innerWidth <= 768) {
-                companyMenu.classList.remove('active');
-                submenu.classList.remove('active');
-            }
+    // Close menu when clicking a menu item
+    mobileMenuItems.forEach(item => {
+        item.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
         });
     });
 
@@ -54,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Section header animations
-    const sectionHeaders = document.querySelectorAll('section h2');
     const observerOptions = {
         threshold: 0.2
     };
@@ -63,6 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
+            } else {
+                entry.target.classList.remove('visible');
             }
         });
     }, observerOptions);
