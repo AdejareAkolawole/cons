@@ -99,6 +99,7 @@ body {
     display: flex;
     align-items: center;
     gap: 0.3rem;
+    cursor: pointer;
 }
 
 .company-toggle i {
@@ -123,6 +124,10 @@ body {
 }
 
 .company-menu:hover .submenu {
+    display: grid;
+}
+
+.submenu.active {
     display: grid;
 }
 
@@ -840,19 +845,20 @@ section h2.visible::after {
         display: none;
     }
 
-    .company-menu.active .submenu {
-        display: grid;
+    .submenu {
         position: static;
         width: 90%;
-        background: #F9FAFB;
-        border: none;
-        box-shadow: none;
-        padding: 0.8rem;
+        max-width: 400px;
+        background: #FFFFFF;
+        border: 1px solid #4A00E0;
+        box-shadow: 0 4px 12px rgba(74, 0, 224, 0.2);
+        padding: 1rem;
+        border-radius: 10px;
+        z-index: 1003;
     }
 
-    .submenu {
-        width: 100%;
-        left: 0;
+    .company-menu.active .submenu {
+        display: grid;
     }
 
     .login-button {
@@ -937,5 +943,10 @@ section h2.visible::after {
     .about-card h3,
     .blog-card h3 {
         font-size: 1.2rem;
+    }
+
+    .submenu {
+        width: 95%;
+        padding: 0.8rem;
     }
 }

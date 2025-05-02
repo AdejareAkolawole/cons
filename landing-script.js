@@ -7,6 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mobile menu toggle
     menuToggle.addEventListener('click', () => {
         navLinks.classList.toggle('active');
+        if (!navLinks.classList.contains('active')) {
+            companyMenu.classList.remove('active');
+            submenu.classList.remove('active');
+        }
     });
 
     // Company submenu toggle for mobile
@@ -14,14 +18,27 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.innerWidth <= 768) {
             e.preventDefault();
             companyMenu.classList.toggle('active');
+            submenu.classList.toggle('active');
         }
     });
 
-    // Close mobile menu when clicking a link
+    // Close mobile menu and submenu when clicking a link
     navLinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             if (window.innerWidth <= 768) {
                 navLinks.classList.remove('active');
+                companyMenu.classList.remove('active');
+                submenu.classList.remove('active');
+            }
+        });
+    });
+
+    // Close submenu when clicking non-Company links
+    navLinks.querySelectorAll('li:not(.company-menu) a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                companyMenu.classList.remove('active');
+                submenu.classList.remove('active');
             }
         });
     });
