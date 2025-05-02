@@ -14,7 +14,7 @@ body {
 
 /* Navigation */
 .navbar {
-    background: linear-gradient(90deg, rgba(74,0,224,0.9), rgba(142,45,226,0.85));
+    background: linear-gradient(90deg, #4A00E0, #8E2DE2);
     padding: 1rem 8%;
     box-shadow: 0 3px 10px rgba(74, 0, 224, 0.15);
     position: fixed;
@@ -119,6 +119,7 @@ body {
     gap: 0.8rem;
     border: 1px solid transparent;
     background: linear-gradient(#FFFFFF, #FFFFFF) padding-box, linear-gradient(45deg, #4A00E0, #8E2DE2) border-box;
+    z-index: 1002;
 }
 
 .company-menu:hover .submenu {
@@ -808,8 +809,8 @@ section h2.visible::after {
         top: 0;
         right: -100%;
         width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, #4A00E0, #8E2DE2);
+        height: 100vh;
+        background: #4A00E0;
         flex-direction: column;
         align-items: center;
         justify-content: center;
@@ -823,7 +824,7 @@ section h2.visible::after {
     }
 
     .nav-links li {
-        margin: 1rem 0;
+        margin: 1.5rem 0;
     }
 
     .nav-links a {
